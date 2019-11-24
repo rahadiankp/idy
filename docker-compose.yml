@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7.27
+    container_name: db
+    hostname: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: idy
+      MYSQL_USER: idy
+      MYSQL_PASSWORD: idy
+    ports:
+      - 3307:3306
+
+  phalcon:
+#    image: eboraas/phalcon:latest
+    image: mileschou/phalcon:7.3-apache
+    container_name: phalcon
+    hostname: phalcon
+    volumes:
+      - .:/var/www/phalcon
+      - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - 8001:80
